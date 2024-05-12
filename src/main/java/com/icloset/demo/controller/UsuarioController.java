@@ -1,5 +1,6 @@
-package com.icloset.demo;
+package com.icloset.demo.controller;
 
+import com.icloset.demo.dto.LoginDTO;
 import com.icloset.demo.entity.Usuarios;
 import com.icloset.demo.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,13 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity save(@RequestBody Usuarios usuario) {
         return new ResponseEntity(usuarioService.save(usuario), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity findByEmailAndPassword(@RequestBody LoginDTO loginDTO) {
+        return new ResponseEntity(usuarioService.findByEmailAndPassword(loginDTO), HttpStatus.OK);
     }
 }
